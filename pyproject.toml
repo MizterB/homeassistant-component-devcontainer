@@ -11,11 +11,10 @@ classifiers = [
   "Framework :: AsyncIO",
   "Intended Audience :: Developers",
   "Natural Language :: English",
-  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3",
 ]
 keywords = [
-  "abestorm",
   "automation",
   "automations",
   "component",
@@ -33,9 +32,9 @@ keywords = [
   "homeassistant",
   "integration",
 ]
-requires-python = ">=3.12,<3.13"
+requires-python = ">=3.13.2"
 dependencies = [
-    "homeassistant>=2024.7.0",
+    "homeassistant>=2025.5.0",
 ]
 
 [project.urls]
@@ -45,24 +44,24 @@ Changelog = "https://github.com/MizterB/homeassistant-component-name/releases"
 Support = "https://github.com/MizterB/homeassistant-component-name/issues"
 Issues = "https://github.com/MizterB/homeassistant-component-name/issues"
 Repository = "https://github.com/MizterB/homeassistant-component-name"
-
 [tool.hatch.metadata]
 allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
-packages = ["custom_components/component_name"]
+packages = ["custom_components/spook"]
 
 [tool.ruff]
-src = ["custom_components/component_name"]
+src = ["custom_components/spook"]
 
 [tool.ruff.lint]
 ignore = [
-  "ANN101", # Self... explanatory
+  "A005", # It is just wrong
   "ANN401", # Opiniated warning on disallowing dynamically typed expressions
   "D203", # Conflicts with other rules
   "D213", # Conflicts with other rules
-  "TID252", # Relative imports
   "RUF012", # Just broken
+  "TC006", # Checks for unquoted type expressions in typing.cast() calls.
+  "TID252", # Relative imports
 
   # Formatter conflicts
   "COM812",
@@ -106,8 +105,7 @@ disable = [
   "used-before-assignment",
 ]
 
-[tool.rye]
-managed = true
+[tool.uv]
 dev-dependencies = [
   "pre-commit>=3.6.0",
   "pre-commit-hooks>=4.5.0",

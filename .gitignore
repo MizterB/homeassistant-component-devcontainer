@@ -114,3 +114,6 @@ _build
 config
 !.vscode/tasks.json
 !.vscode/launch.json
+
+# Locks
+*.lock

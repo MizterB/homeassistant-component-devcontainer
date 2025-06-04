@@ -2,28 +2,30 @@
   "name": "Home Assistant custom component development environment",
   "dockerFile": "./Dockerfile",
   "features": {
-    "ghcr.io/devcontainers/features/github-cli:1": {
-      "installDirectlyFromGitHubRelease": true,
-      "version": "latest"
-    },
-    "ghcr.io/schlich/devcontainer-features/rye:1": {
-      "uv": true
-    }
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/va-h/devcontainers-features/uv:1": {}
   },
-  "forwardPorts": [8123],
+  "forwardPorts": [8123, 3000],
   "portsAttributes": {
     "8123": {
       "label": "Home Assistant",
       "onAutoForward": "openBrowserOnce"
+    },
+    "3000": {
+      "label": "Documentation",
+      "onAutoForward": "openBrowserOnce"
+    },
+    "3100": {
+      "label": "Documentation (live updates)",
+      "autoForward": "silent"
     }
   },
   "runArgs": ["-e", "GIT_EDITOR=code --wait"],
-  "onCreateCommand": "rye config --set-bool behavior.use-uv=true",
-  "updateContentCommand": "rye sync",
-  "postCreateCommand": "mkdir -p ${containerWorkspaceFolder}/config",
+  "onCreateCommand": "npm install -g mystmd",
+  "updateContentCommand": "uv sync && uv run pre-commit install",
   "containerEnv": {
-    "DEVCONTAINER": "1",
-    "RYE_HOME": "/home/vscode/.rye"
+    "DEVCONTAINER": "1"
   },
   "remoteUser": "vscode",
   "customizations": {
